@@ -33,13 +33,13 @@ class Producto(models.Model):
 
 # Modelo de Pedidos
 class Pedido(models.Model):
-    producto =
-    cliente =
-    quantity = 
-    address = 
-    phone =
-    date = 
-    status = 
+    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+    address = models.CharField(max_length=100, default="", blank=True)
+    phone = models.CharField(max_length=15, default="", blank=True)
+    date = models.DateField(default=datetime.datetime.today)
+    status = models.BooleanField(default=False)
 
     def __str__(self):
         return self.product
