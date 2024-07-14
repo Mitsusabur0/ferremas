@@ -22,9 +22,10 @@ class Cliente(models.Model):
 # Modelo de Productos
 class Producto(models.Model):
     name = models.CharField(max_length=50)
-    price = models.DecimalField(default=0, decimal_places=2, max_digits=10)
+    price = models.DecimalField(default=0, decimal_places=0, max_digits=10)
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, default=1)
-    description = models.CharField(max_length=200, default="", blank=True, null=True)
+    # description = models.CharField(max_length=200, default="", blank=True, null=True)
+    marca = models.CharField(max_length=100, default="Genérico")
     image = models.ImageField(upload_to="uploads/producto")
 
     def __str__(self):
