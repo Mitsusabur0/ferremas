@@ -16,18 +16,25 @@
                 {% endif %}
 
                     <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Catálogo</a>
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Tienda</a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#!">Todos los productos</a></li>
+                        <li><a class="dropdown-item" href="{% url 'catalogo' %}">Todos los productos</a></li>
                         <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="#!">Categorías</a></li>
+                        <li><a class="dropdown-item" href="{% url 'categoria' 'Herramientas' %}">Herramientas</a></li>
+                        <li><a class="dropdown-item" href="{% url 'categoria' 'Herramientas-eléctricas' %}">Herramientas eléctricas</a></li>
+                        <li><a class="dropdown-item" href="{% url 'categoria' 'Materiales-de-construcción' %}">Materiales de construcción</a></li>
+                        <li><a class="dropdown-item" href="{% url 'categoria' 'Equipos-de-Seguridad' %}">Equipos de seguridad</a></li>
+                        <li><a class="dropdown-item" href="{% url 'categoria' 'Equipos-de-medición' %}">Equipos de medición</a></li>
+                        <li><a class="dropdown-item" href="{% url 'categoria' 'Tornillos-y-Anclajes' %}">Tornillos y anclajes</a></li>
+                        <li><a class="dropdown-item" href="{% url 'categoria' 'Fijaciones-y-Adhesivos' %}">Fijaciones y adhesivos</a></li>
+                        
                     </ul>
                 </li>
             </ul>
             <form class="d-flex">
                 <button class="btn btn-outline-dark" type="submit">
                     <i class="bi-cart-fill me-1"></i>
-                    Cart
+                    Carro
                     <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
                 </button>
             </form>

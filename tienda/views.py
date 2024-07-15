@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Producto
+from .models import Producto, Categoria
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -54,3 +54,28 @@ def register_user(request):
             return redirect("register")
     else:
         return render(request, "register.html", {"form":form})
+
+def producto(request, pk):
+    producto = Producto.objects.get(id=pk)
+    return render(request, "producto.html", {"producto":producto});
+
+
+def categoria(request, foo):
+    foo = foo.replace("-", " ")
+
+    try:
+        categoria = Categoria.objects.get(name=foo)
+        if categoria == "":
+            productos = Producto.objects.all()
+            return render(request, "categoria.html", {"productos":productos, "categoria":"Todos los productos"})
+        else:
+            productos = Producto.objects.filter(categoria=categoria)
+            return render(request, "categoria.html", {"productos":productos, "categoria":categoria})
+    except:
+        messages.success(request, ("Error en la selección de categorías"))
+        return redirect("home")
+    
+
+def catalogo(request):
+    productos = Producto.objects.all()
+    return render(request, "catalogo.html", {"productos":productos});
