@@ -2,6 +2,10 @@ from django.shortcuts import render, redirect
 from .models import Producto
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+from .forms import SignUpForm
+from django import forms
 
 
 # Create your views here.
@@ -27,14 +31,13 @@ def login_user(request):
     else:
         return render(request, "login.html", {})
 
-
-
-
-    return render(request, "login.html");
-
 def logout_user(request):
     logout(request)
     messages.success(request, ("Sesión cerrada exitosamente."))
     return redirect("home")
 
 
+def register_user(request):
+
+
+    return render(request, "register.html", {})
