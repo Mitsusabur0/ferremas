@@ -24,9 +24,10 @@ class Producto(models.Model):
     name = models.CharField(max_length=50)
     price = models.DecimalField(default=0, decimal_places=0, max_digits=10)
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, default=1)
-    # description = models.CharField(max_length=200, default="", blank=True, null=True)
     marca = models.CharField(max_length=100, default="Genérico")
     image = models.ImageField(upload_to="uploads/producto")
+    is_sale = models.BooleanField(default=False)
+    sale_price = models.DecimalField(default=0, decimal_places=0, max_digits=10)
 
     def __str__(self):
         return self.name
