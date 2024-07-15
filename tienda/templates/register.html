@@ -11,35 +11,24 @@
     </div>
 </header>
 
-
 <div class="container">
 
     <div class="row">
-        <center>
-            <div class="col-md-4">
+            <div class="col-md-4 offset-md-4">
                 <br><br>
-                <form method="POST" action="{% url 'login' %}">
+                <form method="POST" action="{% url 'register' %}">
                     {% csrf_token %}
-                    <div class="mb-3">
-                      <input type="text" class="form-control" name="username" placeholder="Usuario">
-                    </div>
-                    <div class="mb-3">
-                      <input type="password" class="form-control" name="password" placeholder="Contraseña">
-                    </div>
-                    <br>
-                    <button type="submit" class="btn btn-primary">Registrar</button>
-                  </form>
-
-
-
-
-
-
-
+                    {{ form.as_p }}
+                    
+                    <center>
+                        <button class="btn btn-secondary" type="submit">
+                            Registrar
+                        </button>
+                    </center>
+                </form>
                 <br><br><br><br>
                 <br><br><br><br>
             </div>
-        </center>
     </div>
 </div>
 
