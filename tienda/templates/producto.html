@@ -23,17 +23,23 @@
                         <p class="card-text" style="border: 1px solid darkgreen; width:fit-content; padding:10px;">Precio: ${{ producto.price }}</p>
                     {% endif %}
                     <p class="card-text">Marca: {{ producto.marca }}</p>
+                    <p>ID: {{ producto.id }}</p>
 
-    
-                    <a href="{% url 'home' %}" class="btn btn-secondary">Volver</a>
+                    <!-- Volver a inicio -->
+                    <button type="button" class="btn btn-primary" value="{{ product.id }}" id="add-cart">Agregar al carro</button>
+
+                    <!--  -->
+
                 </div>
+
             </div>
+
         </div>
+
     </div>
+    <a href="{% url 'home' %}" class="btn btn-secondary">Volver</a>
+
     </center>
-
-
-
 
 
 </div>
@@ -41,5 +47,41 @@
 
 <br><br><br><br>
 
+<script>
+
+$(document).on("click", "#add-cart", function(e){
+
+    e.preventDefault();
+    $.ajax({
+        type: "POST",
+        url: "{% url 'cart_add' %}",
+        data: {
+            product_id: $("#add-cart").val(),
+            csrfmiddlewaretoken: "{{ csrf_token }}",
+            action: "post"
+        },
+
+        success: function(json){
+            console.log(json);
+        },
+
+        error: function(xhr, errmsg, err){
+
+        }
+
+
+        
+    });
+
+
+
+})
+
+
+
+
+
+
+</script>
 
 {% endblock %}
