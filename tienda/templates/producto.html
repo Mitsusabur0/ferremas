@@ -23,10 +23,9 @@
                         <p class="card-text" style="border: 1px solid darkgreen; width:fit-content; padding:10px;">Precio: ${{ producto.price }}</p>
                     {% endif %}
                     <p class="card-text">Marca: {{ producto.marca }}</p>
-                    <p>ID: {{ producto.id }}</p>
 
                     <!-- Volver a inicio -->
-                    <button type="button" class="btn btn-primary" value="{{ product.id }}" id="add-cart">Agregar al carro</button>
+                    <button type="button" class="btn btn-primary" value="{{ producto.id }}" id="add-cart">Agregar al carro</button>
 
                     <!--  -->
 
@@ -56,9 +55,9 @@ $(document).on("click", "#add-cart", function(e){
         type: "POST",
         url: "{% url 'cart_add' %}",
         data: {
-            product_id: $("#add-cart").val(),
+            producto_id: $("#add-cart").val(),
             csrfmiddlewaretoken: "{{ csrf_token }}",
-            action: "post"
+            action: "post",
         },
 
         success: function(json){
