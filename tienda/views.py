@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .forms import SignUpForm
+from .forms import SignUpForm, UpdateUserForm, ChangePasswordForm
 from django import forms
 
 
@@ -12,6 +12,18 @@ from django import forms
 def home(request):
     productos = Producto.objects.all()
     return render(request, "home.html", {"productos":productos});
+
+def update_password(request):
+    if request.user.is_authenticated:
+        current_user = request.user
+        if request.method == "POST":
+            pass
+        else:
+            form = ChangePasswordForm(current_user)
+            return render(request, "update_password.html", {"form":form});
+    else:
+        messages.success(request, ("Debes iniciar sesión."))
+        return redirect("home")
 
 def about(request):
     return render(request, "about.html");
@@ -75,7 +87,25 @@ def categoria(request, foo):
         messages.success(request, ("Error en la selección de categorías"))
         return redirect("home")
     
-
 def catalogo(request):
     productos = Producto.objects.all()
     return render(request, "catalogo.html", {"productos":productos});
+
+
+def update_user(request):
+    if request.user.is_authenticated:
+        current_user = User.objects.get(id=request.user.id)
+        user_form = UpdateUserForm(request.POST or None, instance=current_user)
+
+        if user_form.is_valid():
+            user_form.save()
+
+            login(request, current_user)
+            messages.success(request, "Se ha actualizado el perfil de usuario.")
+            return redirect("home")
+        return render(request, "update_user.html", {"user_form":user_form})
+
+
+    else:
+        messages.success(request, "Debe iniciar sesión primero.")
+        return redirect("home")
