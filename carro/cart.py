@@ -32,3 +32,19 @@ class Cart():
     def get_quants(self):
         quantities = self.cart
         return quantities
+
+    def update(self, producto, quantity):
+        producto_id = str(producto)
+        producto_qty = int(quantity)
+
+        ourcart = self.cart
+        ourcart[producto_id] = producto_qty
+
+        self.session.modified = True
+
+        thing = self.cart
+        return thing
+    
+    def delete(self, producto):
+        producto_id = str(producto)
+        
