@@ -7,15 +7,16 @@ from django.http import JsonResponse
 def cart_summary(request):
     cart = Cart(request)
     cart_productos = cart.get_prods
-
-    return render(request, "cart_summary.html", {"cart_productos":cart_productos})
+    quantities = cart.get_quants
+    return render(request, "cart_summary.html", {"cart_productos":cart_productos, "quantities":quantities})
 
 def cart_add(request):
     cart = Cart(request)
     if request.POST.get("action") == "post":
         producto_id = int(request.POST.get("producto_id"))
+        producto_qty = int(request.POST.get("producto_qty"))
         producto = get_object_or_404(Producto, id=producto_id)
-        cart.add(producto=producto)
+        cart.add(producto=producto, quantity=producto_qty)
 
         cart_quantity = cart.__len__()
 

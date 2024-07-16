@@ -33,15 +33,32 @@
                                     <p class="card-text" style="border: 1px solid darkgreen; width:fit-content; padding:10px;">Precio: ${{ producto.price }}</p>
                                 {% endif %}
                                 <p class="card-text">Marca: {{ producto.marca }}</p>
-                                <!-- Volver a inicio -->
-                                <!--  -->
+                                
+                                <div class="row justify-content-center align-items-center">
+                                    <div class="col-md-3">Cantidad:</div>
+                                    <div class="col-md-2">
+                                        <select class="form-select" id="qty-cart">
+                                            
+                                            {% for key, value in quantities.items %}
+                                                    {% if key == producto.id|slugify %}
+                                                    <option selected>{{ value }}</option>
+                                                    {% endif %}
+                                            {% endfor %}
+                                            
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </center>
             {% endfor %}
-
         {% else %}
             <center>El carro está vacío.</center>
         {% endif %}

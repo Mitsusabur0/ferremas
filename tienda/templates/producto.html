@@ -22,10 +22,26 @@
                     {% else %}
                         <p class="card-text" style="border: 1px solid darkgreen; width:fit-content; padding:10px;">Precio: ${{ producto.price }}</p>
                     {% endif %}
-                    <p class="card-text">Marca: {{ producto.marca }}</p>
+                    <p class="card-text" style="color: grey">Marca: {{ producto.marca }}</p>
+                    ID: {{ producto.id }}
+
+                    
+
+                    <div class="row justify-content-center align-items-center">
+                        <div class="col-md-3">Cantidad:</div>
+                        <div class="col-md-2">
+                            <select class="form-select" id="qty-cart">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                    </div>
 
                     <!-- Volver a inicio -->
-                    <button type="button" class="btn btn-primary" value="{{ producto.id }}" id="add-cart">Agregar al carro</button>
+                    <br><button type="button" class="btn btn-primary" value="{{ producto.id }}" id="add-cart">Agregar al carro</button>
 
                     <!--  -->
 
@@ -36,7 +52,7 @@
         </div>
 
     </div>
-    <a href="{% url 'home' %}" class="btn btn-secondary">Volver</a>
+    <a href="{% url 'catalogo' %}" class="btn btn-secondary">Catálogo</a>
 
     </center>
 
@@ -56,6 +72,7 @@ $(document).on("click", "#add-cart", function(e){
         url: "{% url 'cart_add' %}",
         data: {
             producto_id: $("#add-cart").val(),
+            producto_qty: $("#qty-cart option:selected").text(),
             csrfmiddlewaretoken: "{{ csrf_token }}",
             action: "post",
         },
