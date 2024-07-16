@@ -47,4 +47,7 @@ class Cart():
     
     def delete(self, producto):
         producto_id = str(producto)
-        
+        if producto_id in self.cart:
+            del self.cart[producto_id]
+
+        self.session.modified = True
