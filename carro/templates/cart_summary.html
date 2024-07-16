@@ -11,7 +11,56 @@
             </div>
         </div>
     </header>
+    <br>
     <!-- Section-->
+
+    <div class="container">
+        {% if cart_productos %}
+            {% for producto in cart_productos %}
+            <center>
+                <div class="card mb-3" style="max-width: 800px; border: 1px solid black">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="{{ producto.image.url }}" class="img-fluid rounded-start" alt="..."
+                                style="border-right: 1px solid black">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ producto.name }}</h5><br>
+                                {% if producto.is_sale %}
+                                    <p class="card-text" style="border: 1px solid darkgreen; width:fit-content; padding:10px;"><strike>${{ producto.price }}</strike> ${{ producto.sale_price }}</p>
+                                {% else %}
+                                    <p class="card-text" style="border: 1px solid darkgreen; width:fit-content; padding:10px;">Precio: ${{ producto.price }}</p>
+                                {% endif %}
+                                <p class="card-text">Marca: {{ producto.marca }}</p>
+                                <!-- Volver a inicio -->
+                                <!--  -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </center>
+            {% endfor %}
+
+        {% else %}
+            <center>El carro está vacío.</center>
+        {% endif %}
+        
+
+    </div>
+
+
+    
+
+
+
+
+
+
+
+
+
+
 
 
     <br><br><br><br><br><br><br><br><br><br>

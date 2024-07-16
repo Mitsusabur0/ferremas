@@ -1,3 +1,5 @@
+from tienda.models import Producto
+
 class Cart():
     def __init__(self, request):
         self.session = request.session
@@ -17,3 +19,10 @@ class Cart():
 
     def __len__(self):
         return len(self.cart)
+
+    
+    def get_prods(self):
+        producto_ids = self.cart.keys()
+        productos = Producto.objects.filter(id__in=producto_ids)
+
+        return productos
