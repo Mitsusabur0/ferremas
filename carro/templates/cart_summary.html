@@ -70,7 +70,16 @@
             <!-- CONFIRMAR TOTAL  Y PAGO -->
             <div align="center">
                     <p style="font-size: 1.1rem; border: 1px solid black; max-width: fit-content; padding: 5px 10px; border-radius: 5px;">Total: ${{ totals }}</p>
-                    <a href="{% url 'checkout' %}" class="btn btn-success" style="font-size: 1.1rem;">Confirmar orden</a>
+                    <!-- <select name="moneda" id="moneda" style="margin-bottom: 5px; padding: 2px 5px; border-radius: 5px; background-color: whitesmoke; margin-top: 10px" >
+                        <option value="clp">CLP</option>
+                        <option value="usd">USD</option>
+                    </select>  -->
+                    <!-- <a href="{% url 'checkout' %}" class="btn btn-success" style="font-size: 1.1rem;">Confirmar orden</a> -->
+                     <div style="border: 1px solid black; width:fit-content; padding: 10px; border-radius: 5px;">
+                        <span style="font-size: 1.2rem;">Continuar a pago:</span>
+                        <a href="{% url 'checkout' %}" class="btn btn-success" style="font-size: 1.1rem;">CLP</a>
+                        <a href="{% url 'checkout_usd' %}" class="btn btn-success" style="font-size: 1.1rem;">USD</a>
+                     </div>
             </div>
 
         {% else %}

@@ -18,10 +18,14 @@ import requests
 # Create your views here.
 def home(request):
     productos = Producto.objects.all()
+    return render(request, "home.html", {"productos":productos})
+
+def convert():
     res = requests.get("https://api.exchangerate-api.com/v4/latest/usd")
     rates = json.loads(res.text)
     usd = rates["rates"]["CLP"]
-    return render(request, "home.html", {"productos":productos, "usd":usd})
+
+
 
 def producto_list(request):
     productos = Producto.objects.all()
