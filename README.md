@@ -22,14 +22,6 @@ FERREMAS es una distribuidora líder de productos de ferretería y construcción
 
 El proyecto sigue una arquitectura basada en el patrón Modelo-Vista-Controlador (MVC), que se adapta perfectamente al framework Django utilizado. Esta arquitectura permite una separación clara de las responsabilidades y facilita el mantenimiento y escalabilidad del sistema.
 
-## Características Principales
-
-- Sistema de inicio de sesión para diferentes roles (Clientes, Administradores, Vendedores, Bodegueros y Contadores), asignado por los grupos de permisos de Django
-- Catálogo virtual de productos
-- Sistema de carrito de compras
-- Opciones de retiro en tienda y despacho a domicilio
-- Gestión de inventario y pedidos
-
 ## Pasos de Implementación
 
 1. **Análisis y Planificación:**
@@ -44,13 +36,20 @@ El proyecto sigue una arquitectura basada en el patrón Modelo-Vista-Controlador
    - Implementación del backend utilizando Django.
    - Desarrollo del frontend con HTML, CSS y JavaScript.
    - Integración de la base de datos.
+   - El sistema posee 4 apps de Django: 
+      - ferremas_project (app del projecto)
+      - tienda (app principal, donde se genera la funcionalidad del catálogo, usuarios, ofertas, etc)
+      - carro (app donde se desarrolla el carro de compras)
+      - pago (app donde se desarolla el pago del carro de compras)
    - Se crea una API propia que devuelve un JSON del catálogo completo de productos (url= "/api/productos"), y también de cada producto (url= "/api/productos/id"). El id de cada producto se obtiene de la lista de todos los productos.
    - Se convierte la moneda a USD utilizando la API del sitio "https://api.exchangerate-api.com/v4/latest/usd" y las librerías requests y json
 
 4. **Pruebas:**
    - Realización de pruebas unitarias y de integración.
+      - Estas pruebas se realizan con el sistema de pruebas integrado del framework Django (las pruebas están en "tienda/tests.py").
    - Pruebas de usuario para garantizar una experiencia fluida.
+      - Pruebas manuales del funcionamiento fluido de la app.
 
 ## Instalación y Configuración
 
-Es un proyecto django. Se deben instalar todas las dependencias con 'pip install' para que funcione correctamente.
+Es un proyecto django. Se deben instalar todas las librerías y dependencias para que funcione correctamente (con pip install u otro).
