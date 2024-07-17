@@ -1,6 +1,9 @@
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, SetPasswordForm
 from django import forms
+from .models import Profile
+
+
 
 
 # Registrar usuario
@@ -36,9 +39,9 @@ class SignUpForm(UserCreationForm):
 # Editar usuario
 class UpdateUserForm(UserChangeForm):
     password = None
-    email = forms.EmailField(label="Email", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Correo electrónico'}))
-    first_name = forms.CharField(label="Nombre", max_length=100, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Nombre'}))
-    last_name = forms.CharField(label="Apellido", max_length=100, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Apellido'}))
+    email = forms.EmailField(label="Email", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Correo electrónico'}), required=False)
+    first_name = forms.CharField(label="Nombre", max_length=100, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Nombre'}), required=False)
+    last_name = forms.CharField(label="Apellido", max_length=100, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Apellido'}), required=False)
 
     class Meta:
         model = User
@@ -69,3 +72,16 @@ class ChangePasswordForm(SetPasswordForm):
         self.fields['new_password2'].widget.attrs['placeholder'] = 'Confirmar contraseña'
         self.fields['new_password2'].label = ''
         self.fields['new_password2'].help_text = '<span class="form-text text-muted"><small>Ingrese la contraseña nuevamente.</small></span>'
+
+
+
+
+class UserInfoForm(forms.ModelForm):
+    phone = forms.CharField(label="Teléfono", widget=forms.TextInput(attrs={"class":"form-control", "placeholder":"Teléfono"}), required=False)
+    address1 = forms.CharField(label="Dirección", widget=forms.TextInput(attrs={"class":"form-control", "placeholder":"Dirección"}), required=False)
+    address2 = forms.CharField(label="Dirección 2", widget=forms.TextInput(attrs={"class":"form-control", "placeholder":"Dirección 2"}), required=False)
+    city = forms.CharField(label="Ciudad", widget=forms.TextInput(attrs={"class":"form-control", "placeholder":"Ciudad"}), required=False)
+
+    class Meta:
+        model = Profile
+        fields = ("phone", "address1", "address2", "city")

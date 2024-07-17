@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
-from .models import Producto, Categoria
+from .models import Producto, Categoria, Profile
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .forms import SignUpForm, UpdateUserForm, ChangePasswordForm
+from .forms import SignUpForm, UpdateUserForm, ChangePasswordForm, UserInfoForm
 from django import forms
 
 
@@ -12,6 +12,26 @@ from django import forms
 def home(request):
     productos = Producto.objects.all()
     return render(request, "home.html", {"productos":productos});
+
+
+
+
+def update_info(request):
+    if request.user.is_authenticated:
+        current_user = Profile.objects.get(user__id=request.user.id)
+        form = UserInfoForm(request.POST or None, instance=current_user)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Se ha actualizado la información")
+            return redirect("home")
+        return render(request, "update_info.html", {"form":form})
+    else:
+        messages.success(request, "Debe iniciar sesión primero.")
+        return redirect("home")
+
+
+
 
 def update_password(request):
     if request.user.is_authenticated:
@@ -34,8 +54,12 @@ def update_password(request):
         messages.success(request, ("Debes iniciar sesión."))
         return redirect("home")
 
+
+
 def about(request):
     return render(request, "about.html");
+
+
 
 def login_user(request):
     if request.method == "POST":
@@ -52,10 +76,13 @@ def login_user(request):
     else:
         return render(request, "login.html", {})
 
+
+
 def logout_user(request):
     logout(request)
     messages.success(request, ("Sesión cerrada exitosamente."))
     return redirect("home")
+
 
 
 def register_user(request):
@@ -68,22 +95,24 @@ def register_user(request):
             password = form.cleaned_data["password1"]
             user = authenticate(username=username, password=password)
             login(request, user)
-            messages.success(request, ("Usuario creado exitosamente."))
-            return redirect("home")
+            messages.success(request, ("Usuario creado. Agregue su información personal."))
+            return redirect("update_info")
         else:
             messages.success(request, ("Error al registrar, intente nuevamente."))
             return redirect("register")
     else:
         return render(request, "register.html", {"form":form})
 
+
+
 def producto(request, pk):
     producto = Producto.objects.get(id=pk)
     return render(request, "producto.html", {"producto":producto});
 
 
+
 def categoria(request, foo):
     foo = foo.replace("-", " ")
-
     try:
         categoria = Categoria.objects.get(name=foo)
         if categoria == "":
@@ -96,9 +125,12 @@ def categoria(request, foo):
         messages.success(request, ("Error en la selección de categorías"))
         return redirect("home")
     
+
+
 def catalogo(request):
     productos = Producto.objects.all()
     return render(request, "catalogo.html", {"productos":productos});
+
 
 
 def update_user(request):
@@ -113,8 +145,6 @@ def update_user(request):
             messages.success(request, "Se ha actualizado el perfil de usuario.")
             return redirect("home")
         return render(request, "update_user.html", {"user_form":user_form})
-
-
     else:
         messages.success(request, "Debe iniciar sesión primero.")
         return redirect("home")
