@@ -37,10 +37,12 @@ El proyecto sigue una arquitectura basada en el patrón Modelo-Vista-Controlador
    - Desarrollo del frontend con HTML, CSS y JavaScript.
    - Integración de la base de datos.
    - El sistema posee 4 apps de Django: 
-      - ferremas_project (app del projecto)
-      - tienda (app principal, donde se genera la funcionalidad del catálogo, usuarios, ofertas, etc)
-      - carro (app donde se desarrolla el carro de compras)
-      - pago (app donde se desarolla el pago del carro de compras)
+      - ferremas_project (app del projecto).
+      - tienda (app principal, donde se genera la funcionalidad del catálogo, usuarios, ofertas, etc).
+      - carro (app donde se desarrolla el carro de compras).
+      - pago (app donde se desarolla el pago del carro de compras).
+   - La administración del sitio se realiza a través del panel de administración de Django (se creó un superuser -usuario:admin, password:javalist- para realizar todos los procesos de administración en url "/admin").
+   - El admin puede asignar un grupo a cada usuario registrado. Con estos grupos se le dan los permisos correspondientes a cada staff de la tienda, para que puedan realizar sus tareas correspondientes en el panel de administración.
    - Se crea una API propia que devuelve un JSON del catálogo completo de productos (url= "/api/productos"), y también de cada producto (url= "/api/productos/id"). El id de cada producto se obtiene de la lista de todos los productos.
    - Se convierte la moneda a USD utilizando la API del sitio "https://api.exchangerate-api.com/v4/latest/usd" y las librerías requests y json
 
