@@ -10,7 +10,6 @@ class Profile(models.Model):
     date_modified = models.DateTimeField(User, auto_now=True)
     phone = models.CharField(max_length=20, blank=True, )
     address1 = models.CharField(max_length=200, blank=True)
-    # address2 = models.CharField(max_length=200, blank=True)
     city = models.CharField(max_length=200, blank=True)
 
     def __str__(self):

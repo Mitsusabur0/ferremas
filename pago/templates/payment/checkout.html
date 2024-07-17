@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <!-- Header-->
+    <header class="bg-dark py-4">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-white">
+                <h1 class="display-5 fw-bolder">Confirmar Orden</h1>
+                <p class="lead fw-normal text-white-50 mb-0">Revisa tus productos.</p>
+            </div>
+        </div>
+    </header>
+    <br>
+    <!-- Section-->
+
+    <!-- Resumen de orden -->
+    <div class="container justify-content-center align-items-center">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">Carro de Compras</div>
+                    <div class="card-body">
+                        <ul>
+                            {% for producto in cart_productos %}
+                                <li>
+                                    <strong style="display: flex; justify-content: space-between;">
+                                        {{ producto.name }}:
+                                        <div>
+                                            {% if producto.is_sale %}
+                                                ${{ producto.sale_price }} <br>
+                                            {% else %}
+                                                ${{ producto.price }} <br>
+                                            {% endif %}
+                                        </div>
+                                    </strong>
+
+                                    <small>
+                                        Cantidad:
+                                        {% for key, value in quantities.items %}
+                                            {% if key == producto.id|slugify %}
+                                                {{ value }}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </small>
+                                </li>
+                            {% endfor %}
+                        </ul>
+
+                    </div>
+                </div>
+
+                <!-- Total -->
+                <div class="container" style="margin-top: 10px; margin-left: 0px; max-width: fit-content; padding:5px; border-radius:5px; border: 1px solid black; font-size: 1.2rem;">Total: ${{ totals }}</div>
+                <br>
+
+                <!-- If logged in, show shipping info, if not, just pick up -->
+                {% if shipping_form %}
+
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">Información de despacho</div>
+                        <div class="card-body">
+                    {{ shipping_form.as_p }}
+
+                        </div>
+                    </div>
+                    <select style="padding: 2px 5px; border-radius: 5px; background-color: whitesmoke; margin-top: 10px" name="lugar_entrega" id="lugar-entrega">
+                        <option value="despacho">Despacho a domicilio</option>
+                        <option value="retiro">Retiro en tienda</option>
+                    </select> 
+
+
+                {% else %}
+                    <select style="padding: 2px 5px; border-radius: 5px; background-color: whitesmoke; margin-top: 10px" name="lugar_entrega" id="lugar-entrega">
+                        <option value="retiro">Retiro en tienda</option>
+                        <option value="despacho" disabled>Despacho a domicilio</option>
+                    </select>
+                    <br><small>Se debe iniciar sesión para despacho a domicilio.</small>
+                {% endif %}
+
+                <br><br>
+                <a href="{% url 'cart_summary' %}" class="btn btn-secondary">Volver al carro</a>
+                <a href="#" class="btn btn-success">Continuar a pago</a>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <br><br><br><br><br><br><br><br>
+{% endblock %}

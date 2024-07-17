@@ -15,7 +15,7 @@
     <!-- Section-->
 
     <div class="container">
-        <a class="btn btn-secondary" href="{% url 'catalogo' %}">Volver a catálogo</a><br><br>
+        <a class="btn btn-primary" href="{% url 'catalogo' %}">Volver a catálogo</a><br><br>
         {% if cart_productos %}
             {% for producto in cart_productos %}
             <center>
@@ -55,8 +55,7 @@
                                     </div>
                                 </div><br>
 
-
-                                <button class="btn btn-secondary update-cart" type="button" data-index="{{ producto.id }}">Actualizar</button>
+                                <button class="btn btn-primary update-cart" type="button" data-index="{{ producto.id }}">Actualizar</button>
                                 <button class="btn btn-danger delete-producto" type="button" data-index="{{ producto.id }}">Eliminar</button>
 
                             </div>
@@ -65,12 +64,13 @@
                 </div>
             </center>
             {% endfor %}
+            <br>
 
-            <div>
-                <br>
-                <center>
-                    <h3>Total: ${{ totals }}</h3>
-                </center>
+
+            <!-- CONFIRMAR TOTAL  Y PAGO -->
+            <div align="center">
+                    <p style="font-size: 1.1rem; border: 1px solid black; max-width: fit-content; padding: 5px 10px; border-radius: 5px;">Total: ${{ totals }}</p>
+                    <a href="{% url 'checkout' %}" class="btn btn-success" style="font-size: 1.1rem;">Confirmar orden</a>
             </div>
 
         {% else %}
