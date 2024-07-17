@@ -15,11 +15,19 @@
 
     <div class="row">
             <div class="col-md-4 offset-md-4">
-                <br><br>
+                <br>
+                <strong>Información de usuario</strong>
+                <br>
+
                 <form method="POST" action="{% url 'update_info' %}">
                     {% csrf_token %}
                     {{ form.as_p }}
+
+                    <br><br>
+                    <strong>Dirección de envío a domicilio</strong>
+                    {{ shipping_form.as_p }}
                     
+
                     <button class="btn btn-primary" type="submit">
                         Actualizar Información
                     </button>

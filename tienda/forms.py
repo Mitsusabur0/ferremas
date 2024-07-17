@@ -79,9 +79,9 @@ class ChangePasswordForm(SetPasswordForm):
 class UserInfoForm(forms.ModelForm):
     phone = forms.CharField(label="Teléfono", widget=forms.TextInput(attrs={"class":"form-control", "placeholder":"Teléfono"}), required=False)
     address1 = forms.CharField(label="Dirección", widget=forms.TextInput(attrs={"class":"form-control", "placeholder":"Dirección"}), required=False)
-    address2 = forms.CharField(label="Dirección 2", widget=forms.TextInput(attrs={"class":"form-control", "placeholder":"Dirección 2"}), required=False)
+    # address2 = forms.CharField(label="Dirección 2", widget=forms.TextInput(attrs={"class":"form-control", "placeholder":"Dirección 2"}), required=False)
     city = forms.CharField(label="Ciudad", widget=forms.TextInput(attrs={"class":"form-control", "placeholder":"Ciudad"}), required=False)
 
     class Meta:
         model = Profile
-        fields = ("phone", "address1", "address2", "city")
+        fields = ("phone", "address1", "city")
