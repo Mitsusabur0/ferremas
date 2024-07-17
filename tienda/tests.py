@@ -26,7 +26,6 @@ class EcommerceTests(TestCase):
         self.assertTrue(Profile.objects.filter(user=self.user).exists())
 
     def test_home_view(self):
-        # Test that the home view returns a 200 status code and uses the correct template.
         # Verificar que la view home retorne un status 200, usando el template correcto
         response = self.client.get(reverse('home'))
         self.assertEqual(response.status_code, 200)
