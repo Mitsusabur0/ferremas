@@ -51,12 +51,19 @@
                 </div>
 
                 <!-- Total -->
-                <div class="container" style="margin-top: 10px; margin-left: 0px; max-width: fit-content; padding:5px; border-radius:5px; border: 1px solid black; font-size: 1.2rem;">Total: ${{ totals }}</div>
+                <div class="container" style="color:darkgreen; margin-top: 10px; margin-left: 0px; max-width: fit-content; padding:5px; border-radius:5px; border: 1px solid darkgreen; font-size: 1.2rem;">Total: ${{ totals }}</div>
                 <br>
+                <a href="{% url 'cart_summary' %}" class="btn btn-secondary">Volver al carro</a>
+                <a href="#" class="btn btn-success">Continuar a pago</a>
+                <br><br>
 
                 <!-- If logged in, show shipping info, if not, just pick up -->
                 {% if shipping_form %}
-
+                    <select style="margin-bottom: 5px; padding: 2px 5px; border-radius: 5px; background-color: whitesmoke; margin-top: 10px" name="lugar_entrega" id="lugar-entrega">
+                        <option value="despacho">Despacho a domicilio</option>
+                        <option value="retiro">Retiro en tienda</option>
+                    </select> 
+                    <br>
                     <div class="card">
                         <div class="card-header bg-primary text-white">Información de despacho</div>
                         <div class="card-body">
@@ -64,10 +71,7 @@
 
                         </div>
                     </div>
-                    <select style="padding: 2px 5px; border-radius: 5px; background-color: whitesmoke; margin-top: 10px" name="lugar_entrega" id="lugar-entrega">
-                        <option value="despacho">Despacho a domicilio</option>
-                        <option value="retiro">Retiro en tienda</option>
-                    </select> 
+
 
 
                 {% else %}
@@ -79,8 +83,7 @@
                 {% endif %}
 
                 <br><br>
-                <a href="{% url 'cart_summary' %}" class="btn btn-secondary">Volver al carro</a>
-                <a href="#" class="btn btn-success">Continuar a pago</a>
+
 
             </div>
         </div>

@@ -8,15 +8,30 @@ from .forms import SignUpForm, UpdateUserForm, ChangePasswordForm, UserInfoForm
 from pago.forms import ShippingForm
 from pago.models import ShippingAddress
 from django import forms
+from django.http import JsonResponse
+from .serializers import ProductoSerializer
+import json
+import requests
+
 
 
 # Create your views here.
 def home(request):
     productos = Producto.objects.all()
-    return render(request, "home.html", {"productos":productos});
+    res = requests.get("https://api.exchangerate-api.com/v4/latest/usd")
+    rates = json.loads(res.text)
+    usd = rates["rates"]["CLP"]
+    return render(request, "home.html", {"productos":productos, "usd":usd})
 
+def producto_list(request):
+    productos = Producto.objects.all()
+    serializer = ProductoSerializer(productos, many=True)
+    return JsonResponse({"Productos": serializer.data}, safe=False)
 
-
+def producto_json(request, pk):
+    producto = Producto.objects.get(id=pk)
+    serializer = ProductoSerializer(producto)
+    return JsonResponse({"Producto": serializer.data}, safe=False)
 
 def update_info(request):
     if request.user.is_authenticated:
@@ -34,8 +49,6 @@ def update_info(request):
     else:
         messages.success(request, "Debe iniciar sesión primero.")
         return redirect("home")
-
-
 
 
 def update_password(request):

@@ -13,5 +13,10 @@ urlpatterns = [
     path("producto/<int:pk>", views.producto, name="producto"),
     path("catalogo", views.catalogo, name="catalogo"),
     path("categoria/<str:foo>", views.categoria, name="categoria"),
+    # API
+    path("api/productos", views.producto_list, name="producto_list"),
+    path("api/productos/", views.producto_list, name="producto_list"),
+    path("api/productos/<int:pk>", views.producto_json, name="producto_json"),
+
 
 ]

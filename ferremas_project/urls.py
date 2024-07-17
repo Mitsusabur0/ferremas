@@ -9,5 +9,6 @@ urlpatterns = [
     path("", include("tienda.urls")),
     path("carro/", include("carro.urls")),
     path("pago/", include("pago.urls")),
+    
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
