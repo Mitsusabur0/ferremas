@@ -44,6 +44,8 @@ El proyecto sigue una arquitectura basada en el patrón Modelo-Vista-Controlador
    - Implementación del backend utilizando Django.
    - Desarrollo del frontend con HTML, CSS y JavaScript.
    - Integración de la base de datos.
+   - Se crea una API propia que devuelve un JSON del catálogo completo de productos (url= "/api/productos"), y también de cada producto (url= "/api/productos/id"). El id de cada producto se obtiene de la lista de todos los productos.
+   - Se convierte la moneda a USD utilizando la API del sitio "https://api.exchangerate-api.com/v4/latest/usd" y las librerías requests y json
 
 4. **Pruebas:**
    - Realización de pruebas unitarias y de integración.
